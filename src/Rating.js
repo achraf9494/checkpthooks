@@ -35,9 +35,9 @@ const Rating = ({ rate, handleRating }) => {
     </div>
   );
 };
-// Rating.defaultProps = {
-//   rate: 1,
-//   handleRating: () => {},
-// };
+Rating.defaultProps = {
+  rate: 1,
+  handleRating: () => {},
+};
 export default Rating;
 

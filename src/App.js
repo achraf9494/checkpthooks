@@ -6,6 +6,8 @@ import SearchMovies from './Components/SearchMovies';
 import { moviesData } from './data';
 import AddMovies from './Components/AddMovies'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router , Switch , Route } from 'react-router-dom' ; 
+import Info from './Components/Info';
 
 
 
@@ -18,22 +20,32 @@ function App() {
   const handleRating = (newRate) => setSearchRating(newRate);
   return (
     <div className='App' >
+    <Router>
+    
       <div className="Nav">
         <SearchMovies search={search} setSearch={setSearch}  handleRating={handleRating}
-        searchRating={searchRating} /></div>
-     <div className='container-fluid movie-app' >
-     <MovieList film={movies.filter
-     (el => 
-      el.name
-      .toLowerCase()
-      .includes(search.toLowerCase().trim())  &&
-            movies.rating >= searchRating
-     )} />
+        searchRating={searchRating} />
+        </div>
+         <Switch>
+           <Route exact path="/" render={() =>(<div className='container-fluid movie-app' >
       
-     </div>
+      <MovieList film={movies.filter
+      (el => 
+       el.name
+       .toLowerCase()
+       .includes(search.toLowerCase().trim()) && el.rating >= searchRating
+      )} />
+      </div>)}/>
+      <Route path='/infos/:name' render={(props) => <Info movies={movies} {...props} /> }/>
+
+           
+     
+     </Switch>
+     </Router>
      < AddMovies handleAdd={handleAdd} /> 
 
     </div>
+    
   );
 }
 
